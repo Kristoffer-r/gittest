@@ -26,15 +26,16 @@ updatePackageVersion <- function(packageLocation ="."){
   writeLines(desc, file.path(packageLocation, "DESCRIPTION"))
  return(vFinal)
 }
-library(git2r)
-library(adapr)
+git_commit = function(message){
+  require(git2r)
+  files = dir(".", recursive = T)
+  exts = tools::file_ext (files)
+  files = files[!exts %in% c("Rproj")]
+  repo = init(".")
+  add(repo, files)
+  commit(repo, message)
+}
 
-files = dir(".", recursive = T)
-exts = tools::file_ext (files)
-files = files[!exts %in% c("Rproj")]
-repo = init(".")
-add(repo, files)
 
-commit(repo, "Test R commit")
-default_signature(repo)
-?git.commit
+
+
