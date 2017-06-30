@@ -26,7 +26,7 @@ updatePackageVersion <- function(packageLocation ="."){
   writeLines(desc, file.path(packageLocation, "DESCRIPTION"))
  return(vFinal)
 }
-git_commit = function(message){
+git_commit = function(message, push_now=T){
   require(git2r)
   files = dir(".", recursive = T)
   exts = tools::file_ext (files)
@@ -34,8 +34,8 @@ git_commit = function(message){
   repo = init(".")
   add(repo, files)
   commit(repo, message)
+  if(push_now){
+    push(repo)
+  }
 }
-
-
-
 
