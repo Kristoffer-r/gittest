@@ -35,7 +35,7 @@ git_commit = function(message, push_now=T){
   add(repo, files)
   commit(repo, message)
   if(push_now){
-    push(repo)
+    push(repo, cred_user_pass-class("Kristoffer-r", "inflames1"))
   }
 }
 
